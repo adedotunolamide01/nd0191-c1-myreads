@@ -2,6 +2,11 @@ import React from "react";
 import { Move } from "./Move";
 
 const Book = ({ book, updateShelf }) => {
+  const image = book.imageLinks && book.imageLinks.thumbnail;
+  const noImage =
+    "https://149348893.v2.pressablecdn.com/wp-content/uploads/2019/03/no-image-available.png";
+  const noAuthor = "No Author";
+  const authors = book.authors && book.authors.join(" & ");
   return (
     <div className="book">
       <div className="book-top">
@@ -10,7 +15,8 @@ const Book = ({ book, updateShelf }) => {
           style={{
             width: 128,
             height: 193,
-            backgroundImage: `url(${book.imageLinks.thumbnail})`,
+            backgroundSize: "128px 193px",
+            backgroundImage: `url(${image || noImage})`,
           }}
         ></div>
         <div className="book-shelf-changer">
@@ -19,7 +25,7 @@ const Book = ({ book, updateShelf }) => {
       </div>
 
       <div className="book-title">{book.title}</div>
-      <div className="book-authors">{book.authors}</div>
+      <div className="book-authors">{authors || noAuthor}</div>
     </div>
   );
 };
